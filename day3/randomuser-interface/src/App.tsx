@@ -25,6 +25,10 @@ function App() {
     getResultsApi()
   }, [])
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+e.preventDefault();
+setUser({...user, name: e.target.value})
+  }
 
   return (
     <div className="App">
@@ -35,6 +39,9 @@ function App() {
         <input type= 'text' value={user.age} />
         <label>Address:</label>
         <input type= 'text' value={user.address} />
+        <h1>Change the name of {user.name} here</h1>
+        <input type= 'text' value={user.name} onChange= {handleChange} />
+
       </form>
     </div>
   );
