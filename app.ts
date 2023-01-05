@@ -25,7 +25,7 @@ catch(err) {
 
 app.get('/api/puppies/:id', async(req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
-
+console.log('id is:' , id)
 const puppy:Puppy = await PuppyService.findById(id);
 
 if(puppy) {
@@ -61,5 +61,16 @@ return res.status(200).json(updatedPuppy);
   // }
 })
 
+
+app.delete('/api/puppies/:id', async (req: Request, res: Response) => {
+  try {
+    const id : number = parseInt(req.params.id, 10)
+console.log('id is:' , id)
+    await PuppyService.remove(id)
+    res.status(204)
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+})
 
 export default app;

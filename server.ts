@@ -65,4 +65,14 @@ return puppies[id];
 }
 
 
+export const remove = async (id: number): Promise<null | void> => {
+  const item = await findById(id);
+console.log('item is ::'  , item)
+  if (!item) {
+    return null;
+  }
+
+  delete puppies[id];
+};
+
 
