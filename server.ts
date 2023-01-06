@@ -1,7 +1,10 @@
 import app from './app';
-const port = 3000;
+import config from 'config';
+// const port = 3000;
 
-//data model interfaces
+
+const port = config.get<number>('port');
+//data model interfacess
 
 //In memory database
 app.listen(port, (): void => {
@@ -9,5 +12,6 @@ app.listen(port, (): void => {
 });
 
 //service methods
+
 
 
