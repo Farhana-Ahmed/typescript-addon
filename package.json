@@ -22,10 +22,12 @@
   "homepage": "https://github.com/appliedtechnology/addons-ts-lab-puppiesApi#readme",
   "dependencies": {
     "config": "^3.3.8",
+    "cors": "^2.8.5",
     "express": "^4.17.3"
   },
   "devDependencies": {
     "@types/config": "^3.3.0",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",

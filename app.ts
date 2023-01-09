@@ -1,11 +1,18 @@
-import express, { RequestHandler } from "express";
+import express from "express";
 import { Request, Response, Application } from "express";
 import { IPuppy } from "interface";
-import { ICreatePuppyReq, IDeletePuppyReq, IGetPuppyReq } from "puppies.model";
+import cors from 'cors';
+import {
+  ICreatePuppyReq,
+  IDeletePuppyReq,
+  IGetPuppyReq,
+  IUpdatePuppyReq,
+} from "puppies.model";
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 //test
 app.get("/api/test", (_req: Request, res: Response) => {
   return res.status(200).json({ test: "is working as it should" });
@@ -86,11 +93,29 @@ app.post("/api/puppies", (req: ICreatePuppyReq, res: Response) => {
   return res.status(201).json({ message: "created successfully" });
 });
 
+//update a puppy
+//not working
+app.put("/api/puppies/:id", (req: IUpdatePuppyReq, res: Response) => {
+  const updateIndex = puppies.findIndex((p) => p.id == req.params.id);
+  console.log("endpoint being hit", updateIndex);
+
+  if (updateIndex) {
+    const updatePuppy = {
+      name: req.body.name,
+      birthdate: req.body.birthdate,
+      breed: req.body.breed,
+    };
+    return res.status(200).json(updatePuppy);
+  }
+  return;
+  // return res.status(200).json(updatePuppy)
+});
+
 //deleting a puppy
 
 app.delete("/api/puppies/:id", (req: IDeletePuppyReq, res: Response) => {
- const delIndex =  puppies.findIndex(p => p.id == req.params.id)
- puppies.splice(delIndex, 1)
+  const delIndex = puppies.findIndex((p) => p.id == req.params.id);
+  puppies.splice(delIndex, 1);
   return res.status(204);
 });
 
