@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState } from 'react';
 import './App.css';
+import AddPuppy from './Components/AddPuppy';
 export interface IPuppy {
   name: string,
   birthdate: string,
@@ -12,10 +12,14 @@ export interface IProps {
   puppies: Array<IPuppy>;
 }
 
+const defaultPuppies: IPuppy[] = [];
+
 function App() {//props: IProps
 const [puppies, setPuppies] = useState<Array<IPuppy>>([]);
+const[name , setName] = useState('')
+const [posts, setPosts]: [IPuppy[], (posts: IPuppy[]) => void] = React.useState(defaultPuppies);
   useEffect(() => {
-const fetchApi = async() =>{
+const getAllPuppies = async() =>{
 const results = await fetch('http://localhost:3001/api/puppies/')
 const data = await results.json()
 setPuppies(data)
@@ -27,25 +31,31 @@ setPuppies(data)
 //   }
 // })
 }
-fetchApi()
+getAllPuppies()
   }, [])
+
+  const AddPuppy = (puppy : IPuppy) => {
+    const [result, setResult] = useState<Array<IPuppy>>([]);
+    fetch('https://swapi.co/api/starships', {
+        method: 'POST',
+        body: JSON.stringify(puppy)
+      })
+        .then(response => response.json())
+        .then(response => {
+          setResult( response );
+        })
+        
+  
+  }
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>,puppy : IPuppy ) => {
+e.preventDefault();
+AddPuppy(puppy)
+  }
 
   return (
     <div className="App">
       <h1>Fun with Puppies</h1>
-
-      {/* {tutorials &&
-            tutorials.map((tutorial, index) => (
-              <li
-                className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
-                }
-                onClick={() => setActiveTutorial(tutorial, index)}
-                key={index}
-              >
-                {tutorial.title}
-              </li>
-            ))} */}
+         
 {
   puppies && 
   puppies.map((puppy, index) => (
@@ -54,10 +64,9 @@ fetchApi()
     </li>
   ))
 }
-    {/* <p>{puppy.name}</p> */}
-   {/* {props.puppies.length > 0 ? 
-  props.puppies.map(i => <p>i['name']</p>)  */}
-  {/* : null} */}
+
+{/* <button onClick={handleClick}>Add</button> */}
+  
     </div>
   );
 } 
