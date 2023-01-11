@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { IPuppy } from '../../../interface'
 import PuppyDetails from './PuppyDetails'
@@ -15,12 +16,21 @@ setIsClick(true)
         
   return (
     <div>
-        <h1>{puppy.name}</h1>
-        <p>{puppy.breed}</p>
-        <Link to={`/puppies/${puppy.id}`}>
+        <Card style={{ width: "18rem" }} >
+        <Card.Body>
+          <Card.Title>{puppy.name}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            {puppy.breed}
+          </Card.Subtitle>
+          <Link to={`/puppies/${puppy.id}`}>
         <button onClick={handleClick} >See details</button>
         </Link>
         {isClick ? <PuppyDetails /> : null}
+          </Card.Body>
+        </Card>
+        {/* <h1>{puppy.name}</h1>
+        <p>{puppy.breed}</p> */}
+        
        
 
     </div>
