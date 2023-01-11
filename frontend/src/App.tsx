@@ -1,26 +1,29 @@
 import React from "react";
-import { HashRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { Route, Link, Routes, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import PuppiesList from "./Components/PuppiesList";
 import Home from "./Components/Home";
+import PuppyDetails from "./Components/PuppyDetails";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <div>
+      {/* <BrowserRouter> */}
+        {/* <div>
           <nav>
-            <Link to="/api/puppies">Fun with puppies</Link>
-          </nav>
+            <Link to="/">Fun with puppies</Link>
+          </nav> */}
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/puppies" element={<PuppiesList />} />
+            <Route path="/puppies/:id" element={<PuppyDetails />} />
           </Routes>
-        </div>
-      </Router>
-    </div>
-  );
+        {/* </div> */}
+      {/* </BrowserRouter> */}
+     </div> 
+  );  
 }
 
 export default App;

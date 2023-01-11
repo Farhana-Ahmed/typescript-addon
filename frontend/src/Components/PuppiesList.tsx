@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { IPuppy } from '../../../interface';
 import Puppy from './Puppy';
 
@@ -14,7 +15,7 @@ const PuppiesList = () => {
     getAllPuppies();
   }, []);
   return (
-    <div>
+    <div className='puppylist__container'>
         {puppies &&
         puppies.map((puppy: IPuppy, index) => (
           <Puppy puppy={puppy} key={index} />
