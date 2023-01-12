@@ -16,9 +16,9 @@ setIsClick(true)
         
   return (
     <div>
-        <Card style={{ width: "18rem" }} >
+        <Card style={{ width: "18rem", margin: "10px", height: "20rem"}} >
         <Card.Body>
-          <Card.Title>{puppy.name}</Card.Title>
+          <Card.Title style={{textAlign:"center"}}>{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {puppy.breed}
           </Card.Subtitle>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { IPuppy } from '../../../interface';
 import Puppy from './Puppy';
+import './PuppiesList.css';
 
 const PuppiesList = () => {
     const [puppies, setPuppies] = useState<Array<IPuppy>>([]);

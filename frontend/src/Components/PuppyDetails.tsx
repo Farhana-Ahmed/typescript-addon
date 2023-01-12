@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { IPuppy } from "../../../interface";
 import Card from "react-bootstrap/Card";
 import { Alert, Button } from "react-bootstrap";
-
+import './PuppyDetails.css';
 const PuppyDetails = () => {
   const [puppy, setPuppy] = useState<IPuppy>({} as IPuppy);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -59,47 +59,49 @@ useEffect(() => {
 
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" , margin: "10px", height: "20rem"}}>
         <Card.Body>
           <Card.Title>{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {puppy.breed}
+            <hr></hr>
+            {puppy.birthdate}
           </Card.Subtitle>
-          <p>Edit puppy with id: {puppy.id}</p>
-          <Button variant="primary" onClick={e => handleEdit(e)}>
+          
+          <Button variant="primary" onClick={e => handleEdit(e)} style={{ margin: "10px"}}>
             Edit
           </Button>
-          <Button variant="primary" onClick={e => handleDelete(e)}>
+          <Button variant="primary" onClick={e => handleDelete(e)} style={{ margin: "10px"}}>
             Delete
           </Button>
           {isDelete ? <Alert variant="success">Deleted successfully</Alert> : null}
-          {isEdit && 
-         <form onSubmit={e => handleSave(e)}>
+          {isEdit ? 
+         <form className="puppy__editform" onSubmit={handleSave}>
             <img src={puppy.image}/>
-         <input
+         <input className="text-input"
            type="text"
            name="name"
-           placeholder="Enter name"
+           placeholder="Edit name"
            onChange={handleChange}
            value={puppy.name}
          />
-         <input
+         <input className="text-input"
            type="text"
            name="breed"
-           placeholder="Enter breed name"
+           placeholder="Edit breed name"
            onChange={handleChange}
            value={puppy.breed}
          />
-         <input
+         <input className="text-input"
            type="text"
            name="birthdate"
-           placeholder="Enter date of birth "
+           placeholder="Edit date of birth "
            onChange={handleChange}
            value={puppy.birthdate}
          />
-         <button>Save</button>
+         <button className="puppy__editbutton">Save</button>
        </form>
-            }
+            : null}
 
         </Card.Body>
       </Card>

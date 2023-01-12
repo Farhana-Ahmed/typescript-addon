@@ -1,0 +1,42 @@
+.puppy__editform {
+    max-width:270px; margin:0px auto;
+    border-radius: 10px;
+   }
+   .text-input {
+    color:black;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight:500;
+    font-size: 18px;
+    border-radius: 10px;
+    line-height: 2px;
+    background-color: transparent;
+    border:2px solid #CC6666;
+    transition: all 0.3s;
+    padding: 13px;
+    margin-bottom: 15px;
+    width:100%;
+    box-sizing: border-box;
+    outline:0;  
+    margin-right: 120px;
+   }
+   .puppy__editbutton{
+    /* display: inline-block;
+    width: 100px;
+  margin-left: 20px;
+  border-radius: 10px; */
+  color:rgb(35, 191, 139);
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight:500;
+    font-size: 18px;
+    border-radius: 10px;
+    line-height: 22px;
+    background-color: transparent;
+    border:2px solid #CC6666;
+    transition: all 0.3s;
+    padding: 13px;
+    margin-bottom: 15px;
+    width:100%;
+    box-sizing: border-box;
+    outline:0;  
+    margin-right: 120px;
+   }
