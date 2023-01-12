@@ -18,6 +18,7 @@ setIsClick(true)
     <div>
         <Card style={{ width: "18rem", margin: "10px", height: "20rem"}} >
         <Card.Body>
+        <img src={puppy.image} alt="puppy" style={{ width: "10rem" , height: "12rem"}}/>
           <Card.Title style={{textAlign:"center"}}>{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {/* {puppy.breed} */}

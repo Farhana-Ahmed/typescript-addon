@@ -61,6 +61,7 @@ useEffect(() => {
     <div>
       <Card style={{ width: "18rem" , margin: "10px", height: "20rem"}}>
         <Card.Body>
+        <img src={puppy.image} alt="puppy" style={{ width: "10rem" , height: "12rem"}}/>
           <Card.Title>Name:{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             Breed:{puppy.breed}
@@ -77,7 +78,7 @@ useEffect(() => {
           {isDelete ? <Alert variant="success">Deleted successfully</Alert> : null}
           {isEdit ? 
          <form  onSubmit={handleSave}>
-            <img src={puppy.image}/>
+            
          <input 
            type="text"
            name="name"

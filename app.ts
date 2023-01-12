@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response, Application } from "express";
-import { IPuppy } from "interface";
+// import { IPuppy } from "interface";
+
 import cors from "cors";
 
 import {
@@ -11,6 +12,7 @@ import {
 } from "puppies.model";
 import validateParams from "./validateParams";
 import { getImage } from "./config/getImage";
+import { IPuppy } from "interface";
 const app: Application = express();
 
 app.use(express.json());
@@ -31,7 +33,7 @@ let puppies: IPuppy[] = [
   {
     name: "dog2",
     id: 2,
-    breed: "Labrador",
+    breed: "Labrador Retriever",
     birthdate: "12-02-2022",
   },
   {
@@ -42,7 +44,7 @@ let puppies: IPuppy[] = [
   },
   {
     name: "dog4",
-    id: 3,
+    id: 4,
     breed: "Pug",
     birthdate: "12-02-2022",
   },
@@ -52,30 +54,38 @@ const validatorObject: IPuppy = {
   name: "some string",
   breed: "some string",
   birthdate: "some string",
+  image: "some string",
 };
 
 type AuthenticationRequest = Request & { body: IPuppy };
 
 //get all puppies
-app.get("/api/puppies", async(_req: IGetPuppyReq, res: Response) => {
- const query = puppies.map(item =>  item.breed)
-  // const imageToIntegrate = getImage(query.map(item => item.breed));
+app.get("/api/puppies", async (_req: IGetPuppyReq, res: Response) => {
+  const query = puppies.map((item) => item.breed);
+  console.log(query);
+  let response;
+  let imageToIntegrate: string | undefined;
+  for (let i = 0; i < query.length; i++) {
+    imageToIntegrate = await getImage(query[i]);
+    // puppies.forEach((i) => (i.image = imageToIntegrate));
+   response =  puppies.map((item) => ({...item, image: imageToIntegrate}))
+    // return res.status(200).json(puppies);
+  }
+  // const resp = puppies.map((item) => ({...item, image: imageToIntegrate}))
+  // puppies.forEach(i => i.image = imageToIntegrate)
   // console.log(imageToIntegrate)
-  return res.status(200).json(puppies);
+  return res.status(200).json(response);
 });
 
 //get puppy by id
 app.get("/api/puppies/:id", async (req: IGetPuppyReq, res: Response) => {
   let puppyById = puppies.filter((p) => p.id == Number(req.params.id));
-const query = (puppyById.map(item =>(item.breed)))
-const image = await getImage(query[0])
-// console.log(typeof image)
-// puppyById = {...puppyById, image}
-// puppyById.push({image: image})
-puppyById[0]?.image
-  return res
-    .status(200)
-    .json(puppyById);
+  const query = puppyById.map((item) => item.breed);
+  // console.log(query)
+  const image = await getImage(query);
+  const resp = puppyById.map((item) => ({ ...item, image: image }));
+
+  return res.status(200).json(resp);
 });
 
 //creating a new puppy
@@ -108,6 +118,7 @@ app.put("/api/puppies/:id", (req: IUpdatePuppyReq, res: Response) => {
     name: name,
     birthdate: birthdate,
     breed: breed,
+    image: "",
   };
   puppies.splice(Number(updateIndex), 1, updatePuppy);
   return res.status(200).json(updatePuppy);
