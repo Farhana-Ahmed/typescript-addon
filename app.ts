@@ -25,19 +25,25 @@ let puppies: IPuppy[] = [
   {
     name: "dog1",
     id: 1,
-    breed: "pitbull",
+    breed: "Pitbull",
     birthdate: "12-02-2022",
   },
   {
     name: "dog2",
     id: 2,
-    breed: "labrador",
+    breed: "Labrador",
     birthdate: "12-02-2022",
   },
   {
     name: "dog3",
     id: 3,
-    breed: "dalmatian",
+    breed: "Dalmatian",
+    birthdate: "12-02-2022",
+  },
+  {
+    name: "dog4",
+    id: 3,
+    breed: "Pug",
     birthdate: "12-02-2022",
   },
 ];
@@ -66,7 +72,7 @@ const image = await getImage(query[0])
 // console.log(typeof image)
 // puppyById = {...puppyById, image}
 // puppyById.push({image: image})
-puppyById.unshift({image: image});
+puppyById[0]?.image
   return res
     .status(200)
     .json(puppyById);
