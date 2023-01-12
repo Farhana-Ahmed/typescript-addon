@@ -61,11 +61,11 @@ useEffect(() => {
     <div>
       <Card style={{ width: "18rem" , margin: "10px", height: "20rem"}}>
         <Card.Body>
-          <Card.Title>{puppy.name}</Card.Title>
+          <Card.Title>Name:{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {puppy.breed}
+            Breed:{puppy.breed}
             <hr></hr>
-            {puppy.birthdate}
+            Date Of birth:{puppy.birthdate}
           </Card.Subtitle>
           
           <Button variant="primary" onClick={e => handleEdit(e)} style={{ margin: "10px"}}>
@@ -76,23 +76,23 @@ useEffect(() => {
           </Button>
           {isDelete ? <Alert variant="success">Deleted successfully</Alert> : null}
           {isEdit ? 
-         <form className="puppy__editform" onSubmit={handleSave}>
+         <form  onSubmit={handleSave}>
             <img src={puppy.image}/>
-         <input className="text-input"
+         <input 
            type="text"
            name="name"
            placeholder="Edit name"
            onChange={handleChange}
            value={puppy.name}
          />
-         <input className="text-input"
+         <input 
            type="text"
            name="breed"
            placeholder="Edit breed name"
            onChange={handleChange}
            value={puppy.breed}
          />
-         <input className="text-input"
+         <input 
            type="text"
            name="birthdate"
            placeholder="Edit date of birth "

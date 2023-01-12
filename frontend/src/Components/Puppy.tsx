@@ -20,7 +20,7 @@ setIsClick(true)
         <Card.Body>
           <Card.Title style={{textAlign:"center"}}>{puppy.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {puppy.breed}
+            {/* {puppy.breed} */}
           </Card.Subtitle>
           <Link to={`/puppies/${puppy.id}`}>
         <button onClick={handleClick} >See details</button>
