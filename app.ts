@@ -54,7 +54,6 @@ const validatorObject: IPuppy = {
   name: "some string",
   breed: "some string",
   birthdate: "some string",
-  image: "some string",
 };
 
 type AuthenticationRequest = Request & { body: IPuppy };
@@ -62,19 +61,13 @@ type AuthenticationRequest = Request & { body: IPuppy };
 //get all puppies
 app.get("/api/puppies", async (_req: IGetPuppyReq, res: Response) => {
   const query = puppies.map((item) => item.breed);
-  console.log(query);
-  let response;
-  let imageToIntegrate: string | undefined;
+
   for (let i = 0; i < query.length; i++) {
-    imageToIntegrate = await getImage(query[i]);
-    // puppies.forEach((i) => (i.image = imageToIntegrate));
-   response =  puppies.map((item) => ({...item, image: imageToIntegrate}))
-    // return res.status(200).json(puppies);
+    const images = await getImage(query[i]);
+    // console.log(images);
   }
-  // const resp = puppies.map((item) => ({...item, image: imageToIntegrate}))
-  // puppies.forEach(i => i.image = imageToIntegrate)
-  // console.log(imageToIntegrate)
-  return res.status(200).json(response);
+
+  return res.status(200).json(puppies);
 });
 
 //get puppy by id
@@ -91,7 +84,8 @@ app.get("/api/puppies/:id", async (req: IGetPuppyReq, res: Response) => {
 //creating a new puppy
 app.post("/api/puppies", (req: AuthenticationRequest, res: Response) => {
   const id = new Date().valueOf();
-
+ 
+  //see later
   if (!validateParams(req.body, validatorObject)) {
     return res.status(400).send({ error: "Invalid body" });
   }

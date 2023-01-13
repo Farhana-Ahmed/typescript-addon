@@ -8,9 +8,7 @@ const AddPuppy = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (!e.target.value) {
-      <Alert variant="failure">Please enter value</Alert>;
-    }
+
     setPuppy({ ...puppy, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
