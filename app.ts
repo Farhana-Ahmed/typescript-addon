@@ -84,7 +84,7 @@ app.get("/api/puppies/:id", async (req: IGetPuppyReq, res: Response) => {
 //creating a new puppy
 app.post("/api/puppies", (req: AuthenticationRequest, res: Response) => {
   const id = new Date().valueOf();
- 
+
   //see later
   if (!validateParams(req.body, validatorObject)) {
     return res.status(400).send({ error: "Invalid body" });
@@ -101,21 +101,24 @@ app.post("/api/puppies", (req: AuthenticationRequest, res: Response) => {
 app.put("/api/puppies/:id", (req: IUpdatePuppyReq, res: Response) => {
   const { id } = req.params;
   const { name, birthdate, breed } = req.body;
+  if (!name || !birthdate || !breed) {
+    return res.status(400).send({ error: "Enter a valid body" });
+  }
   const updateIndex = puppies.find((p) => p.id === Number(id));
 
   if (!updateIndex) {
     return res.status(404).send({ error: "Puppy with this id not found" });
   }
 
-  const updatePuppy = {
-    id: Number(id),
-    name: name,
-    birthdate: birthdate,
-    breed: breed,
-    image: "",
-  };
-  puppies.splice(Number(updateIndex), 1, updatePuppy);
-  return res.status(200).json(updatePuppy);
+  const puppy = puppies.find(puppy => puppy.id === Number(id))
+ 
+  if(puppy) {
+    puppy.name = name,
+    puppy.breed = breed,
+    puppy.birthdate = birthdate
+
+  }
+  return res.status(200).json(puppy);
 });
 
 //deleting a puppy
